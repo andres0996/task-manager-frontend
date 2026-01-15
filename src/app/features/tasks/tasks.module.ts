@@ -55,11 +55,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginator } from "@angular/material/paginator";
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ConfirmDialogComponent } from './components/confirm-dialog.component';
+
+
 
 @NgModule({
   declarations: [
     TasksPageComponent,
-    TaskDialogComponent
+    TaskDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +81,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatToolbarModule,
     MatPaginator,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
 ]
 })
 export class TasksModule { }

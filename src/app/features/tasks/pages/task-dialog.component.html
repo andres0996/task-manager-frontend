@@ -1,8 +1,13 @@
-<h2 mat-dialog-title class="dialog-title">
+<h2 mat-dialog-title class="dialog-title task-card-title">
   {{ task ? 'Editar Tarea' : 'Nueva Tarea' }}
 </h2>
 
-<form [formGroup]="taskForm" (ngSubmit)="save()" mat-dialog-content class="dialog-form">
+<form
+  [formGroup]="taskForm"
+  (ngSubmit)="save()"
+  mat-dialog-content
+  class="dialog-form task-card-body"
+>
 
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Título</mat-label>
@@ -19,9 +24,9 @@
 
 </form>
 
-<mat-dialog-actions align="end" class="dialog-actions">
+<mat-dialog-actions align="end" class="dialog-actions task-card-actions">
   <button mat-stroked-button color="warn" (click)="cancel()">Cancelar</button>
-  <button mat-flat-button color="primary" [disabled]="taskForm.invalid" (click)="save()">
+  <button mat-flat-button color="primary" [disabled]="taskForm.invalid">
     {{ task ? 'Actualizar' : 'Crear' }}
   </button>
 </mat-dialog-actions>

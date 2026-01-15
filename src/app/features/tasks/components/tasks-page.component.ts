@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Task } from '../../../core/models/task.model';
+import { ConfirmDialogComponent } from './confirm-dialog.component';
 
 /**
  * TasksPageComponent
@@ -129,10 +130,17 @@ export class TasksPageComponent implements OnInit {
    * @param id - Task ID to delete
    */
   deleteTask(id: string) {
-    if (!confirm('Delete this task?')) return;
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '360px',
+      disableClose: true
+    });
 
-    this.taskService.deleteTask(id).subscribe(() => {
-      this.dataSource.data = this.dataSource.data.filter(t => t.id !== id);
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (!confirmed) return;
+
+      this.taskService.deleteTask(id).subscribe(() => {
+        this.dataSource.data = this.dataSource.data.filter(t => t.id !== id);
+      });
     });
   }
 

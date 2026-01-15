@@ -14,11 +14,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TasksPageComponent } from '../tasks/components/tasks-page.component';
+import { AuthGuard } from '../../core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: TasksPageComponent
+    component: TasksPageComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

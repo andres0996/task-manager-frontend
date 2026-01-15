@@ -3,7 +3,7 @@
   <mat-card class="tasks-card mat-elevation-z4">
 
     <!-- Toolbar -->
-    <mat-toolbar color="primary" class="tasks-toolbar">
+    <mat-toolbar color="primary" class="tasks-toolbar toolbar-right">
       <span class="title">Mis Tareas</span>
       <span class="spacer"></span>
       <button mat-raised-button color="accent" (click)="addTask()">
@@ -28,31 +28,44 @@
 
     <!-- Filter -->
     <mat-form-field appearance="outline" class="filter-input">
-
       <mat-icon matPrefix>search</mat-icon>
       <input matInput [(ngModel)]="filterValue" (keyup)="applyFilter()" placeholder="Título o descripción">
     </mat-form-field>
 
-    <!-- Cards -->
+    <!-- Cards Grid -->
     <div class="mobile-cards">
-      <mat-card *ngFor="let task of filteredTasks()" class="task-card mat-elevation-z2">
-        <div><strong>Título:</strong> {{ task.title }}</div>
-        <div><strong>Descripción:</strong> {{ task.description }}</div>
-        <div>
-          <strong>Estado:</strong>
-          <span [ngClass]="task.completed ? 'completed' : 'pending'">
+      <mat-card *ngFor="let task of filteredTasks()" class="task-card mat-elevation-z3">
+
+        <!-- Header: Título + Estado clickeable -->
+        <div class="task-header">
+          <h3 class="task-title">{{ task.title }}</h3>
+          <button class="status-badge"
+                  [ngClass]="task.completed ? 'completed' : 'pending'"
+                  (click)="toggleCompleted(task)">
             {{ task.completed ? 'Completada' : 'Pendiente' }}
+          </button>
+        </div>
+
+        <!-- Description -->
+        <div class="task-description" *ngIf="task.description">
+          {{ task.description }}
+        </div>
+
+        <!-- Footer: Fecha + Acciones -->
+        <div class="task-footer">
+          <span class="task-date">
+            <mat-icon>calendar_today</mat-icon> {{ task.createdAt | date:'short' }}
           </span>
+          <div class="actions">
+            <button mat-icon-button color="primary" (click)="editTask(task)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteTask(task.id!)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
-        <div><strong>Creada:</strong> {{ task.createdAt | date:'short' }}</div>
-        <div class="actions">
-          <button mat-icon-button color="primary" (click)="editTask(task)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="deleteTask(task.id!)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
+
       </mat-card>
     </div>
 
