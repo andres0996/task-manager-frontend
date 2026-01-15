@@ -1,0 +1,13 @@
+:root {
+  --primary-color: #4f46e5;
+  --secondary-color: #6366f1;
+  --background-color: #f3f4f6;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --error-color: #ef4444;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--primary-color);
+}
