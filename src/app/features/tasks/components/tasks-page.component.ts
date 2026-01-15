@@ -35,6 +35,10 @@ export class TasksPageComponent implements OnInit {
   /** Error message if fetching fails */
   error = '';
 
+  /** Filter value */
+  filterValue: string = '';
+  displayedTasks: Task[] = [];
+
   /** References for sorting and pagination */
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,6 +57,7 @@ export class TasksPageComponent implements OnInit {
    */
   ngOnInit() {
     const email = this.authService.getEmail();
+    this.displayedTasks = this.dataSource.data;
     if (!email) {
       this.router.navigate(['/login']);
       return;
@@ -156,12 +161,17 @@ export class TasksPageComponent implements OnInit {
    * Applies a filter to the table based on user input
    * @param event - Input event from filter input
    */
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter() {
+    this.displayedTasks = this.filteredTasks();
+  }
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  filteredTasks(): Task[] {
+    if (!this.filterValue) return this.dataSource.data;
+
+    const filter = this.filterValue.toLowerCase();
+    return this.dataSource.data.filter(task =>
+      task.title.toLowerCase().includes(filter) ||
+      (task.description ?? '').toLowerCase().includes(filter)
+    );
   }
 }
