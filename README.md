@@ -52,9 +52,44 @@ The architecture also follows principles inspired by Clean Architecture, focusin
 This section will be completed once the final project structure is defined.  
 The project will follow a feature-based architecture to ensure scalability, maintainability, and clear separation of concerns.
 
+- **core**: Contains single-instance services (e.g., HTTP interceptors, auth guards) and global models.  
+- **shared**: Reusable components, directives, and pipes used across multiple features.  
+- **modules**: Each feature (tasks, auth, etc.) has its own folder containing all components, services, and models related to that feature.  
+- **assets & styles**: Static resources and global styling.  
+- **environments**: Configurations for different environments (dev, prod).
+
 ## Application Flow
 
-This section will be completed once the full user flow is implemented.
+### 1. Login / Authentication (if applicable)
+   Users enter their credentials to access the application.
+
+### 2. View Tasks 
+   All tasks are displayed as cards with:
+   - Title  
+   - Description  
+   - Status (Completed / Pending)  
+   - Created date  
+   - Action buttons (Edit / Delete)
+
+### 3. Filter Tasks
+   Users can filter tasks by title or description. Cards update in real-time as text is entered.
+
+### 4. Add New Task  
+   Clicking the "New" button opens a form to create a task, which is then added to the list.
+
+### 5. Edit Task  
+   Each card has an Edit button to modify the title, description, or status of a task.
+
+### 6. Delete Task  
+   Each card has a Delete button to remove the task from the list.
+
+### 7. Responsive Design
+   - Desktop: cards arranged in multiple columns  
+   - Mobile: cards displayed in a single column
+
+### 8. Loading & Error States 
+   - Spinner shown while tasks load  
+   - Error messages displayed if something goes wrong
 
 ## Backend Integration
 
@@ -126,22 +161,22 @@ Follow these steps to run the project locally:
 
 ### 1. Clone the repository
 
-```bash
-git clone https://github.com/andres0996/task-manager-frontend.git
-cd task-manager-frontend
-```
+  ```bash
+  git clone https://github.com/andres0996/task-manager-frontend.git
+  cd task-manager-frontend
+  ```
 
 ### 2. Install dependencies
 
-```bash
-npm install
-```
+  ```bash
+  npm install
+  ```
 
 ### 3. Run the development server
 
-```bash
-ng serve
-```
+  ```bash
+  ng serve
+  ```
 
 ### 4. Open in your browser
 
@@ -150,18 +185,51 @@ Open the application at [http://localhost:4200](http://localhost:4200)
 
 ## Testing
 
-This section will be completed in future iterations.
+This project uses **Jest** / **Karma + Jasmine** to run unit tests for Angular components and services.
+
+- Run all unit tests:
+
+```bash
+ng test
+```
 
 ## Production Build
 
-This section will be completed in future iterations.
+To generate a production-ready version of the Task Manager frontend, Angular CLI provides a build command that optimizes the application for deployment.
 
-The production build will be generated using Angular CLI with optimization, minification, and tree-shaking enabled to ensure optimal performance.
+Run the following command in your project root:
+
+```bash
+ng build --configuration production
+```
 
 ## Deployment
 
-This section will be completed in future iterations.  
-The application will be deployed to Firebase Hosting.
+### 1. Install Firebase CLI
+
+If you haven't installed the Firebase CLI, install it globally using npm:
+
+```bash
+npm install -g firebase-tools
+```
+
+Log in to your Firebase account
+
+```bash
+firebase login
+```
+
+Initialize Firebase Hosting
+
+```bash
+firebase init
+```
+
+Deploy to Firebase
+
+```bash
+firebase deploy
+```
 
 ## Technical Decisions
 
@@ -174,12 +242,6 @@ This project follows several technical and architectural decisions to ensure mai
 - Separation of concerns: UI, business logic, and data handling are separated to follow Clean Architecture principles.
 - Placeholder sections: Some parts like testing, production build, and deployment are planned for future iterations.
 - Responsiveness and accessibility: Design decisions ensure the app works on multiple devices and follows basic accessibility standards.
-
-## Future Improvements
-
-This section will be completed in future iterations.
-
-Planned improvements will include additional features, enhanced testing, and optimizations for scalability, performance, and user experience.
 
 ## Author
 
